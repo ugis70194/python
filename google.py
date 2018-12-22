@@ -1,15 +1,16 @@
 import time
-import getpass
+import json
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 
+f = open("user_data.json",'r')
+user_data = json.load(f)
 options = Options()
-options.binary_location = "C:/Users/ugis/AppData/Local/Google/Chrome SxS/Application/chrome.exe"
+options.binary_location = user_data["chromePATH"]
 options.add_argument("--headless")
-
-driver = webdriver.Chrome(chrome_options=options, executable_path="c:/Driver/chromedriver.exe")
+driver = webdriver.Chrome(chrome_options=options, executable_path=user_data["chromedriverPATH"])
 
 driver.get("https://www.google.co.jp/")
 time.sleep(1)
