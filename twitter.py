@@ -1,12 +1,15 @@
 import time
 import getpass
-from collections import deque
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
 
-driver = webdriver.Chrome("c:/Driver/chromedriver.exe")
-driver.set_window_size(300,500)
+options = Options()
+options.binary_location = "C:/Users/ugis/AppData/Local/Google/Chrome SxS/Application/chrome.exe"
+options.add_argument("--headless")
+
+driver = webdriver.Chrome(chrome_options=options, executable_path="c:/Driver/chromedriver.exe")
 driver.get("https://twitter.com/login")
 
 user = driver.find_element_by_xpath("//input[@class='js-username-field email-input js-initial-focus']")
@@ -28,13 +31,16 @@ time.sleep(3)
 submit = False
 tweetstr = ""
 while True  :
+    for TL_user_name in driver.find_elements_by_xpath("//strong[@class='fullname show-popup-with-id u-textTruncate']") :
+        print(TL_user_name)
+
     input_str = input()
     if(input_str == "quit") : 
         driver.close()
         break
     if(input_str == "send") : submit = True
     elif(input_str == "del") : tweetstr = ""
-    else : tweetstr += input_str
+    else : tweetstr += (input_str + '\n')
 
     if(submit) : 
         time.sleep(1)
