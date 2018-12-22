@@ -22,13 +22,13 @@ def init() :
 
 def update() : 
     update = unsolved
-    update.reverse
+    update.reverse()
     with open(filePath, mode = "w") as file : file.write('\n'.join(update))
 
 def Add_Problem() :
     print("Please input URL")
     new_ploblem = input()
-    unsolved.append(new_ploblem)
+    unsolved.insert(0,new_ploblem)
     urls.put(new_ploblem)
     update()
 
