@@ -44,24 +44,21 @@ def Pop_Problem() :
     except queue.Empty : 
         print("queue is empty... Please push url!\n")
 
-def Quit() :
-    global In_use
-    In_use = False
-    update()
-
 def main() :  
-    global In_use
     print("The numbor of problems in queue is " + str(urls.qsize()) + '\n')
     print("Mode Select" + "\n" + "push : i" + "\n" + "pop : p" + "\n" + "quit : q")
     commnd = input()
     if commnd == 'i' : Add_Problem()
     if commnd == 'p' : Pop_Problem()
-    if commnd == 'q' : Quit()
+    if commnd == 'q' : return None
+
+    return main()
 
 
 if __name__ == "__main__" :
     init()
-    while In_use : main()
+    main()
+
 '''
 TO DO
 submitterの機能を取り込む
